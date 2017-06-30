@@ -13,13 +13,13 @@ public class SolveAlgorithm extends HashMap<Word, String> {
         putAll(tblB);
     }
 
-    public List<String> getByInclude(final Map<Word,String> tbl){
+    public List<String> getByExclude(final Map<Word,String> tbl){
         keySet().removeAll(tbl.keySet());
 
         return new ArrayList<>(values());
     }
 
-    public List<String> getByExclude(final Map<Word,String> tbl){
+    public List<String> getByInclude(final Map<Word,String> tbl){
         keySet().retainAll(tbl.keySet());
 
         return new ArrayList<>(values());
