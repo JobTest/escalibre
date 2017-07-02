@@ -5,7 +5,6 @@ import com.escalibre.model.Item;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -15,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AlgorithmWithJava8Test {
+public class AlgorithmJ7Test {
 
-    private AlgorithmWithJava8 algorithm;
+    private AlgorithmJ7 algorithm;
     private EmbeddedDatabase dbTblA, dbTblB;
     private ItemDaoImpl itemDao;
 
@@ -35,7 +34,7 @@ public class AlgorithmWithJava8Test {
                 .build();
 
         itemDao = new ItemDaoImpl();
-        algorithm = new AlgorithmWithJava8();
+        algorithm = new AlgorithmJ7();
     }
 
     @After
@@ -55,21 +54,24 @@ public class AlgorithmWithJava8Test {
 //        System.out.println( "right (size) = " + tblB.size() );
 
         ////////////////////////////////////////////////////////////////////////
+        List<Item> items = new ArrayList<>();
         List<String> tblC = new ArrayList<>();
         long start, finish;
 
         start = System.currentTimeMillis();
-        tblC = algorithm.leftJoin(tblA, tblB);
-//        tblC = algorithm.leftJoin(tblA, null);
-//        tblC = algorithm.leftJoin(null, tblB);
+        items = algorithm.leftJoin(tblA, tblB);
+//        items = algorithm.leftJoin(tblA, null);
+//        items = algorithm.leftJoin(null, tblB);
         finish = System.currentTimeMillis();
+//        tblC = algorithm.toIDs(items);
         System.out.println( "tblC (leftJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
 
         start = System.currentTimeMillis();
-        tblC = algorithm.rightJoin(tblA, tblB);
-//        tblC = algorithm.rightJoin(tblA, null);
-//        tblC = algorithm.rightJoin(null, tblB);
+        items = algorithm.rightJoin(tblA, tblB);
+//        items = algorithm.rightJoin(tblA, null);
+//        items = algorithm.rightJoin(null, tblB);
         finish = System.currentTimeMillis();
+//        tblC = algorithm.toIDs(items);
         System.out.println( "tblC (rightJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
 
         System.out.println( "tblC: " + tblC );

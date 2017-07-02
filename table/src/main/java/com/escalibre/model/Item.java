@@ -1,7 +1,7 @@
 package com.escalibre.model;
 
 
-import com.escalibre.util.BasicUtil;
+import com.escalibre.util.IdGeneratorUtil;
 
 public class Item {
 
@@ -13,7 +13,7 @@ public class Item {
     
     public Item(String word){
         this.word = word;
-        id = BasicUtil.getUniqueId();
+        id = IdGeneratorUtil.getUniqueId();
     }
 
     public String getWord() {

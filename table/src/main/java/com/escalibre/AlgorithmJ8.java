@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
-public class AlgorithmWithJava8 {
+public class AlgorithmJ8 extends Algorithm {
 
     public List<String> leftJoin(List<Item> tblA, List<Item> tblB){
         if (tblA==null)
@@ -22,6 +22,10 @@ public class AlgorithmWithJava8 {
                 .filter(i -> !tblB.contains(i))
                 .map(i -> i.getId())
                 .collect(Collectors.toList());
+//        return tblA.parallelStream()
+//                .filter(a -> (tblB.parallelStream()
+//                        .noneMatch(b -> tblA.contains(b))))
+//                .collect(Collectors.toList());
     }
 
     public List<String> rightJoin(List<Item> tblA, List<Item> tblB){
@@ -35,5 +39,9 @@ public class AlgorithmWithJava8 {
                 .filter(i -> !tblA.contains(i))
                 .map(i -> i.getId())
                 .collect(Collectors.toList());
+//        return tblB.parallelStream()
+//                .filter(b -> (tblA.parallelStream()
+//                        .noneMatch(a -> tblB.contains(a))))
+//                .collect(Collectors.toList());
     }
 }
