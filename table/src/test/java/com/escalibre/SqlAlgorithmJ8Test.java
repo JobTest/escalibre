@@ -78,6 +78,9 @@ public class SqlAlgorithmJ8Test {
 //        System.out.println( "tblC: " + tblC );
     }
 
+    /**
+     * С помощью встроенных методов Java-8 можно получить высокую производительность
+     */
     @Test
     public void testFindTblHighPerfomance() {
         List<Tbl> tbls = new ArrayList<>();
@@ -97,6 +100,9 @@ public class SqlAlgorithmJ8Test {
 //        System.out.println( "tblC: " + tblC );
     }
 
+    /**
+     * Производительность зависит от порядка методов в стриме.. , неправильный порядок или лишние операции снижают производительность
+     */
     @Test
     public void testFindTblAlternativePerfomance() {
         List<Tbl> tbls = new ArrayList<>();

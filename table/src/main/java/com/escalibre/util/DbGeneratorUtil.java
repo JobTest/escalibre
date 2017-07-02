@@ -8,16 +8,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.*;
 
-public class RecordGeneratorUtil {
+public class DbGeneratorUtil {
 
     public static final int COPIES = 100;
 
-//    public static void main(String[] args) {
-//        try {
-//            generator();
-//        } catch (IOException e) { e.printStackTrace(); }
-//
-//    }
+    public static void main(String[] args) {
+        try {
+            generator();
+        } catch (IOException e) { e.printStackTrace(); }
+
+    }
 
     public static void generator()
             throws IOException {
@@ -28,7 +28,7 @@ public class RecordGeneratorUtil {
             String name = null;
 
             ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-            TblDao tblDao = (TblDao) context.getBean("itemDao");
+            TblDao tblDao = (TblDao) context.getBean("tblDao");
 
             /*
              * Male names

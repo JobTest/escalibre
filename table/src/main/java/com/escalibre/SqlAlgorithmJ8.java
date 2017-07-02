@@ -13,8 +13,7 @@ public class SqlAlgorithmJ8 extends Algorithm {
     /**
      * Используются stream из Java-8
      * *****************************
-     * Обладает низкой производительностью.
-     * Такой способ более безопасный для работы с циклами.
+     * Обладает высокой производительностью. Такой способ более безопасный для работы с циклами.
      */
 
     public List<Tbl> leftJoin(List<Tbl> tblA, List<Tbl> tblB){
@@ -41,7 +40,7 @@ public class SqlAlgorithmJ8 extends Algorithm {
     /**
      * Альтернативный вариант в стиле Java-8
      * *************************************
-     * (Обладает низкой производительностью)
+     * (Производительность зависит от порядка методов в стриме..)
      */
 
     public List<Tbl> leftJoinAlternative(List<Tbl> tblA, List<Tbl> tblB){

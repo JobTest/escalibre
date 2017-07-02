@@ -6,10 +6,10 @@ import com.escalibre.model.Tbl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Algorithm {
+public abstract class Algorithm {
 
     /**
-     * Конверторы для списка из List< Item(word, id) > в List< id) > или в List< word) >
+     * Конверторы для списка из   List< Item(word, id) >   в   List< id >   или в   List< word >
      */
 
     public List<String> toIDs(List<Tbl> tbls){

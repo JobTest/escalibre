@@ -11,7 +11,7 @@
     <context:component-scan base-package="com.escalibre"/>
     <context:annotation-config/>
 
-    <bean id="itemDao" class="com.escalibre.dao.TblDaoImpl" >
+    <bean id="tblDao" class="com.escalibre.dao.TblDaoImpl" >
         <property name="namedParameterJdbcTemplate" ref="jdbcTemplate" />
     </bean>
 

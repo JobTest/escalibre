@@ -20,9 +20,7 @@ public class SqlAlgorithmJ7Test {
     private EmbeddedDatabase dbTblA, dbTblB;
     private List<Tbl> tblA, tblB;
 
-
     @Before
-
     public void setUp() {
         dbTblA = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
@@ -72,6 +70,9 @@ public class SqlAlgorithmJ7Test {
         System.out.println( "tblC (rightJoin) = " + tblC.size() );
     }
 
+    /**
+     * Производительность класического алгоритма является самой низкой
+     */
     @Test
     public void testFindTblCustomPerfomance() {
         List<Tbl> tbls = new ArrayList<>();
@@ -93,6 +94,9 @@ public class SqlAlgorithmJ7Test {
 //        System.out.println( "tblC: " + tblC );
     }
 
+    /**
+     * Встроенные методы коллекции имеют среднюю производительность
+     */
     @Test
     public void testFindTblMediumPerfomance() {
         List<Tbl> tbls = new ArrayList<>();
