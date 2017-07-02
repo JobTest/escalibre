@@ -32,6 +32,20 @@ public class ItemDaoImpl implements ItemDao {
         return namedParameterJdbcTemplate;
     }
 
+    @Override public void addTbla(Item item) {
+        Map params = new HashMap();
+        params.put("word", item.getWord());
+        params.put("id", item.getId());
+        namedParameterJdbcTemplate.update(INSERT_TBLA_QUERY, params);
+    }
+
+    @Override public void addTblb(Item item) {
+        Map params = new HashMap();
+        params.put("word", item.getWord());
+        params.put("id", item.getId());
+        namedParameterJdbcTemplate.update(INSERT_TBLB_QUERY, params);
+    }
+
     @Override public List<Item> findTblaAll() {
         Map<String, Object> params = new HashMap<>();
         List<Item> items = namedParameterJdbcTemplate.query(FIND_TBLA_ALL_QUERY, params, new ItemMapper());
@@ -42,20 +56,6 @@ public class ItemDaoImpl implements ItemDao {
         Map<String, Object> params = new HashMap<>();
         List<Item> items = namedParameterJdbcTemplate.query(FIND_TBLB_ALL_QUERY, params, new ItemMapper());
         return items;
-    }
-
-    @Override public void putTbla(Item item) {
-        Map params = new HashMap();
-        params.put("word", item.getWord());
-        params.put("id", item.getId());
-        namedParameterJdbcTemplate.update(INSERT_TBLA_QUERY, params);
-    }
-
-    @Override public void putTblb(Item item) {
-        Map params = new HashMap();
-        params.put("word", item.getWord());
-        params.put("id", item.getId());
-        namedParameterJdbcTemplate.update(INSERT_TBLB_QUERY, params);
     }
 
     private static final class ItemMapper implements RowMapper<Item> {
