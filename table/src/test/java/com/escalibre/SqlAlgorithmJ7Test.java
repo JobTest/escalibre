@@ -36,12 +36,12 @@ public class SqlAlgorithmJ7Test {
                 .build();
 
         ItemDaoImpl itemDao = new ItemDaoImpl();
-        algorithm = new SqlAlgorithmJ7();
-
         itemDao.setNamedParameterJdbcTemplate(new NamedParameterJdbcTemplate(dbTblA));
         tblA = itemDao.findTblaAll();
         itemDao.setNamedParameterJdbcTemplate(new NamedParameterJdbcTemplate(dbTblB));
         tblB = itemDao.findTblbAll();
+
+        algorithm = new SqlAlgorithmJ7();
     }
 
     @After

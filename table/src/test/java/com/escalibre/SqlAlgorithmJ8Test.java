@@ -18,7 +18,7 @@ public class SqlAlgorithmJ8Test {
 
     private SqlAlgorithmJ8 algorithm;
     private EmbeddedDatabase dbTblA, dbTblB;
-    private ItemDaoImpl itemDao;
+    private List<Item> tblA, tblB;
 
     @Before
     public void setUp() {
@@ -33,7 +33,12 @@ public class SqlAlgorithmJ8Test {
                 .addScript("db/insert-tblb-data.sql")
                 .build();
 
-        itemDao = new ItemDaoImpl();
+        ItemDaoImpl itemDao = new ItemDaoImpl();
+        itemDao.setNamedParameterJdbcTemplate(new NamedParameterJdbcTemplate(dbTblA));
+        tblA = itemDao.findTblaAll();
+        itemDao.setNamedParameterJdbcTemplate(new NamedParameterJdbcTemplate(dbTblB));
+        tblB = itemDao.findTblbAll();
+
         algorithm = new SqlAlgorithmJ8();
     }
 
@@ -45,11 +50,6 @@ public class SqlAlgorithmJ8Test {
 
     @Test
     public void testFindTblAll() {
-        itemDao.setNamedParameterJdbcTemplate(new NamedParameterJdbcTemplate(dbTblA));
-        List<Item> tblA = itemDao.findTblaAll();
-        itemDao.setNamedParameterJdbcTemplate(new NamedParameterJdbcTemplate(dbTblB));
-        List<Item> tblB = itemDao.findTblbAll();
-
 //        System.out.println( "left (size) = " + tblA.size() );
 //        System.out.println( "right (size) = " + tblB.size() );
 
