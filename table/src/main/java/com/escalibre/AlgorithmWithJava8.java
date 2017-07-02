@@ -2,12 +2,13 @@ package com.escalibre;
 
 
 import com.escalibre.model.Item;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Service
+@Component
 public class AlgorithmWithJava8 {
 
     public List<String> leftJoin(List<Item> tblA, List<Item> tblB){

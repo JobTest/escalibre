@@ -10,12 +10,13 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class AlgorithmWithJava7Test {
 
-    @Autowired
     private AlgorithmWithJava7 algorithm;
     private EmbeddedDatabase dbTblA, dbTblB;
     private ItemDaoImpl itemDao;
@@ -25,15 +26,16 @@ public class AlgorithmWithJava7Test {
         dbTblA = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
                 .addScript("db/create-tbla-db.sql")
-                .addScript("db/_insert-tbla-data.sql")
+                .addScript("db/insert-tbla-data.sql")
                 .build();
         dbTblB = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
                 .addScript("db/create-tblb-db.sql")
-                .addScript("db/_insert-tblb-data.sql")
+                .addScript("db/insert-tblb-data.sql")
                 .build();
 
         itemDao = new ItemDaoImpl();
+        algorithm = new AlgorithmWithJava7();
     }
 
     @After
@@ -49,20 +51,32 @@ public class AlgorithmWithJava7Test {
         itemDao.setNamedParameterJdbcTemplate(new NamedParameterJdbcTemplate(dbTblB));
         List<Item> tblB = itemDao.findTblbAll();
 
-//        List<MyItem> rightJoin = rightJoin(tblA, tblB);
-//        System.out.println( rightJoin );
-//
-//        List<String> its = toIDs(rightJoin);
-//        System.out.println( its );
+//        System.out.println( "left (size) = " + tblA.size() );
+//        System.out.println( "right (size) = " + tblB.size() );
 
-        List<String> tblC = algorithm.toIDs( algorithm.leftJoin(tblA, tblB) );
-//        List<String> tblC = algorithm.toIDs( algorithm.leftJoin(tblA, null) );
-//        List<String> tblC = algorithm.toIDs( algorithm.leftJoin(null, tblB) );
+        ////////////////////////////////////////////////////////////////////////
+        List<Item> items = new ArrayList<>();
+        List<String> tblC = new ArrayList<>();
+        long start, finish;
+
+        start = System.currentTimeMillis();
+        items = algorithm.leftJoin(tblA, tblB);
+//        items = algorithm.leftJoin(tblA, null);
+//        items = algorithm.leftJoin(null, tblB);
+        finish = System.currentTimeMillis();
+        tblC = algorithm.toIDs(items);
+        System.out.println( "tblC (leftJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
+
+        start = System.currentTimeMillis();
+        items = algorithm.rightJoin(tblA, tblB);
+//        items = algorithm.rightJoin(tblA, null);
+//        items = algorithm.rightJoin(null, tblB);
+        finish = System.currentTimeMillis();
+        tblC = algorithm.toIDs(items);
+        System.out.println( "tblC (rightJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
+
         System.out.println( "tblC: " + tblC );
-
-//        List<String> tblC = algorithm.toIDs( algorithm.rightJoin(tblA, tblB) );
-//        List<String> tblC = algorithm.toIDs( algorithm.rightJoin(tblA, null) );
-//        List<String> tblC = algorithm.toIDs( algorithm.rightJoin(null, tblB) );
-//        System.out.println( "tblC: " + tblC );
+        System.out.println( "left (size) = " + tblA.size() );
+        System.out.println( "right (size) = " + tblB.size() );
     }
 }
