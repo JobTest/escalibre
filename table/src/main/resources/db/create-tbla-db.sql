@@ -1,0 +1,6 @@
+--DROP TABLE tbla IF EXISTS;
+
+CREATE TABLE tbla (
+  word VARCHAR(30),
+  id  VARCHAR(50)
+);
