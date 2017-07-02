@@ -25,12 +25,12 @@ public class AlgorithmWithJava8Test {
         dbTblA = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
                 .addScript("db/create-tbla-db.sql")
-                .addScript("db/_insert-tbla-data.sql")
+                .addScript("db/insert-tbla-data.sql")
                 .build();
         dbTblB = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
                 .addScript("db/create-tblb-db.sql")
-                .addScript("db/_insert-tblb-data.sql")
+                .addScript("db/insert-tblb-data.sql")
                 .build();
 
         itemDao = new ItemDaoImpl();
@@ -49,20 +49,25 @@ public class AlgorithmWithJava8Test {
         itemDao.setNamedParameterJdbcTemplate(new NamedParameterJdbcTemplate(dbTblB));
         List<Item> tblB = itemDao.findTblbAll();
 
-//        List<MyItem> rightJoin = rightJoin(tblA, tblB);
-//        System.out.println( rightJoin );
+        ////////////////////////////////////////////////////////////////////////
+        System.out.println( "left (size) = " + tblA.size() );
+        System.out.println( "right (size) = " + tblB.size() );
+
+        ////////////////////////////////////////////////////////////////////////
+////        List<MyItem> rightJoin = rightJoin(tblA, tblB);
+////        System.out.println( rightJoin );
+////
+////        List<String> its = toIDs(rightJoin);
+////        System.out.println( its );
 //
-//        List<String> its = toIDs(rightJoin);
-//        System.out.println( its );
-
-        List<String> tblC = algorithm.leftJoin(tblA, tblB);
-//        List<String> tblC = algorithm.leftJoin(tblA, null);
-//        List<String> tblC = algorithm.leftJoin(null, tblB);
-        System.out.println( "tblC: " + tblC );
-
-//        List<String> tblC = algorithm.rightJoin(tblA, tblB);
-//        List<String> tblC = algorithm.rightJoin(tblA, null);
-//        List<String> tblC = algorithm.rightJoin(null, tblB);
-        System.out.println( "tblC: " + tblC );
+//        List<String> tblC = algorithm.leftJoin(tblA, tblB);
+////        List<String> tblC = algorithm.leftJoin(tblA, null);
+////        List<String> tblC = algorithm.leftJoin(null, tblB);
+//        System.out.println( "tblC: " + tblC );
+//
+////        List<String> tblC = algorithm.rightJoin(tblA, tblB);
+////        List<String> tblC = algorithm.rightJoin(tblA, null);
+////        List<String> tblC = algorithm.rightJoin(null, tblB);
+//        System.out.println( "tblC: " + tblC );
     }
 }
