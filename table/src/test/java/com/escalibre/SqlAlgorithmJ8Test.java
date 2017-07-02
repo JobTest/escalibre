@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AlgorithmJ7Test {
+public class SqlAlgorithmJ8Test {
 
-    private AlgorithmJ7 algorithm;
+    private SqlAlgorithmJ8 algorithm;
     private EmbeddedDatabase dbTblA, dbTblB;
     private ItemDaoImpl itemDao;
 
@@ -34,7 +34,7 @@ public class AlgorithmJ7Test {
                 .build();
 
         itemDao = new ItemDaoImpl();
-        algorithm = new AlgorithmJ7();
+        algorithm = new SqlAlgorithmJ8();
     }
 
     @After
@@ -59,19 +59,17 @@ public class AlgorithmJ7Test {
         long start, finish;
 
         start = System.currentTimeMillis();
-        items = algorithm.leftJoin(tblA, tblB);
-//        items = algorithm.leftJoin(tblA, null);
-//        items = algorithm.leftJoin(null, tblB);
+        tblC = algorithm.leftJoinToIds(tblA, tblB); // >> 931 Millisecond
+//        tblC = algorithm.leftJoinToIds(tblA, null);
+//        tblC = algorithm.leftJoinToIds(null, tblB);
         finish = System.currentTimeMillis();
-//        tblC = algorithm.toIDs(items);
         System.out.println( "tblC (leftJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
 
         start = System.currentTimeMillis();
-        items = algorithm.rightJoin(tblA, tblB);
-//        items = algorithm.rightJoin(tblA, null);
-//        items = algorithm.rightJoin(null, tblB);
+        tblC = algorithm.rightJoinToIds(tblA, tblB); // >> 8 Millisecond
+//        tblC = algorithm.rightJoinToIds(tblA, null);
+//        tblC = algorithm.rightJoinToIds(null, tblB);
         finish = System.currentTimeMillis();
-//        tblC = algorithm.toIDs(items);
         System.out.println( "tblC (rightJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
 
         System.out.println( "tblC: " + tblC );
