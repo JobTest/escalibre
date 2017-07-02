@@ -94,7 +94,7 @@ public class SqlAlgorithmJ7Test {
     }
 
     @Test
-    public void testFindTblHighPerfomance() {
+    public void testFindTblMediumPerfomance() {
         List<Tbl> tbls = new ArrayList<>();
         List<String> tblC = new ArrayList<>();
         long start, finish;

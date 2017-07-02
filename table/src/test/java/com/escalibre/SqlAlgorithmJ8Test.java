@@ -49,31 +49,72 @@ public class SqlAlgorithmJ8Test {
     }
 
     @Test
-    public void testFindTblAll() {
-//        System.out.println( "left (size) = " + tblA.size() );
-//        System.out.println( "right (size) = " + tblB.size() );
+    public void testFindTblComplex() {
+        List<String> tblC = new ArrayList<>();
 
-        ////////////////////////////////////////////////////////////////////////
+        tblC = algorithm.leftJoinToIds(tblA, tblB);
+//        tblC = algorithm.leftJoinToIds(tblA, null);
+//        tblC = algorithm.leftJoinToIds(null, tblB);
+        System.out.println( "tblC (left): " + tblC );
+
+        tblC = algorithm.rightJoinToIds(tblA, tblB);
+//        tblC = algorithm.rightJoinToIds(tblA, null);
+//        tblC = algorithm.rightJoinToIds(null, tblB);
+        System.out.println( "tblC (right): " + tblC );
+    }
+
+    @Test
+    public void testFindTblComplexIsNull() {
+        List<String> tblC = new ArrayList<>();
+
+        tblC = algorithm.leftJoinToIds(tblA, null);
+//        tblC = algorithm.leftJoinToIds(null, tblB);
+        System.out.println( "tblC (leftJoin) = " + tblC.size() );
+//        System.out.println( "tblC: " + tblC );
+
+//        tblC = algorithm.rightJoinToIds(tblA, null);
+        tblC = algorithm.rightJoinToIds(null, tblB);
+        System.out.println( "tblC (rightJoin) = " + tblC.size() );
+//        System.out.println( "tblC: " + tblC );
+    }
+
+    @Test
+    public void testFindTblHighPerfomance() {
         List<Tbl> tbls = new ArrayList<>();
         List<String> tblC = new ArrayList<>();
         long start, finish;
 
         start = System.currentTimeMillis();
-        tblC = algorithm.leftJoinToIds(tblA, tblB); // >> 931 Millisecond
-//        tblC = algorithm.leftJoinToIds(tblA, null);
-//        tblC = algorithm.leftJoinToIds(null, tblB);
+        tblC = algorithm.leftJoinToIds(tblA, tblB); // >> 5 Millisecond
         finish = System.currentTimeMillis();
         System.out.println( "tblC (leftJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
+//        System.out.println( "tblC: " + tblC );
 
         start = System.currentTimeMillis();
-        tblC = algorithm.rightJoinToIds(tblA, tblB); // >> 8 Millisecond
-//        tblC = algorithm.rightJoinToIds(tblA, null);
-//        tblC = algorithm.rightJoinToIds(null, tblB);
+        tblC = algorithm.rightJoinToIds(tblA, tblB); // >> 5 Millisecond
         finish = System.currentTimeMillis();
         System.out.println( "tblC (rightJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
+//        System.out.println( "tblC: " + tblC );
+    }
 
-        System.out.println( "tblC: " + tblC );
-        System.out.println( "left (size) = " + tblA.size() );
-        System.out.println( "right (size) = " + tblB.size() );
+    @Test
+    public void testFindTblAlternativePerfomance() {
+        List<Tbl> tbls = new ArrayList<>();
+        List<String> tblC = new ArrayList<>();
+        long start, finish;
+
+        start = System.currentTimeMillis();
+        tbls = algorithm.leftJoinAlternative(tblA, tblB); // >> 346 Millisecond
+        finish = System.currentTimeMillis();
+        tblC = algorithm.toIDs(tbls);
+        System.out.println( "tblC (leftJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
+//        System.out.println( "tblC: " + tblC );
+
+        start = System.currentTimeMillis();
+        tbls = algorithm.rightJoinAlternative(tblA, tblB); // >> 22 Millisecond
+        finish = System.currentTimeMillis();
+        tblC = algorithm.toIDs(tbls);
+        System.out.println( "tblC (rightJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
+//        System.out.println( "tblC: " + tblC );
     }
 }
