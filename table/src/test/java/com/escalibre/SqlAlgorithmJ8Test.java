@@ -1,7 +1,7 @@
 package com.escalibre;
 
-import com.escalibre.dao.ItemDaoImpl;
-import com.escalibre.model.Item;
+import com.escalibre.dao.TblDaoImpl;
+import com.escalibre.model.Tbl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class SqlAlgorithmJ8Test {
 
     private SqlAlgorithmJ8 algorithm;
     private EmbeddedDatabase dbTblA, dbTblB;
-    private List<Item> tblA, tblB;
+    private List<Tbl> tblA, tblB;
 
     @Before
     public void setUp() {
@@ -33,7 +33,7 @@ public class SqlAlgorithmJ8Test {
                 .addScript("db/insert-tblb-data.sql")
                 .build();
 
-        ItemDaoImpl itemDao = new ItemDaoImpl();
+        TblDaoImpl itemDao = new TblDaoImpl();
         itemDao.setNamedParameterJdbcTemplate(new NamedParameterJdbcTemplate(dbTblA));
         tblA = itemDao.findTblaAll();
         itemDao.setNamedParameterJdbcTemplate(new NamedParameterJdbcTemplate(dbTblB));
@@ -54,7 +54,7 @@ public class SqlAlgorithmJ8Test {
 //        System.out.println( "right (size) = " + tblB.size() );
 
         ////////////////////////////////////////////////////////////////////////
-        List<Item> items = new ArrayList<>();
+        List<Tbl> tbls = new ArrayList<>();
         List<String> tblC = new ArrayList<>();
         long start, finish;
 

@@ -1,21 +1,21 @@
 package com.escalibre.dao;
 
-import com.escalibre.model.Item;
+import com.escalibre.model.Tbl;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.List;
 
-public interface ItemDao {
+public interface TblDao {
 
     void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate);
 
     NamedParameterJdbcTemplate getNamedParameterJdbcTemplate();
 
-    void addTbla(Item item);
+    void addTbla(Tbl tbl);
 
-    void addTblb(Item item);
+    void addTblb(Tbl tbl);
 
-    List<Item> findTblaAll();
+    List<Tbl> findTblaAll();
 
-    List<Item> findTblbAll();
+    List<Tbl> findTblbAll();
 }

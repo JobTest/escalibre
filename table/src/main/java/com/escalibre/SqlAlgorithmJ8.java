@@ -1,9 +1,8 @@
 package com.escalibre;
 
 
-import com.escalibre.model.Item;
+import com.escalibre.model.Tbl;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,7 +17,7 @@ public class SqlAlgorithmJ8 extends Algorithm {
      * Такой способ более безопасный для работы с циклами.
      */
 
-    public List<Item> leftJoin(List<Item> tblA, List<Item> tblB){
+    public List<Tbl> leftJoin(List<Tbl> tblA, List<Tbl> tblB){
         if (tblA==null)
             return null;
         else if (tblB==null)
@@ -28,7 +27,7 @@ public class SqlAlgorithmJ8 extends Algorithm {
                 .collect(Collectors.toList());
     }
 
-    public List<Item> rightJoin(List<Item> tblA, List<Item> tblB){
+    public List<Tbl> rightJoin(List<Tbl> tblA, List<Tbl> tblB){
         if (tblB==null)
             return null;
         else if (tblA==null)
@@ -45,7 +44,7 @@ public class SqlAlgorithmJ8 extends Algorithm {
      * (Обладает низкой производительностью)
      */
 
-    public List<Item> leftJoinAlternative(List<Item> tblA, List<Item> tblB){
+    public List<Tbl> leftJoinAlternative(List<Tbl> tblA, List<Tbl> tblB){
         if (tblA==null)
             return null;
         else if (tblB==null)
@@ -57,7 +56,7 @@ public class SqlAlgorithmJ8 extends Algorithm {
                 .collect(Collectors.toList());
     }
 
-    public List<Item> rightJoinAlternative(List<Item> tblA, List<Item> tblB){
+    public List<Tbl> rightJoinAlternative(List<Tbl> tblA, List<Tbl> tblB){
         if (tblB==null)
             return null;
         else if (tblA==null)
@@ -76,7 +75,7 @@ public class SqlAlgorithmJ8 extends Algorithm {
      * Позволяет одновременно получать и конвертировтаь результат...
      */
 
-    public List<String> leftJoinToIds(List<Item> tblA, List<Item> tblB){
+    public List<String> leftJoinToIds(List<Tbl> tblA, List<Tbl> tblB){
         if (tblA==null)
             return null;
         else if (tblB==null)
@@ -89,7 +88,7 @@ public class SqlAlgorithmJ8 extends Algorithm {
                 .collect(Collectors.toList());
     }
 
-    public List<String> rightJoinToIds(List<Item> tblA, List<Item> tblB){
+    public List<String> rightJoinToIds(List<Tbl> tblA, List<Tbl> tblB){
         if (tblB==null)
             return null;
         else if (tblA==null)

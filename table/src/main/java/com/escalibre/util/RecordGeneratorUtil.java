@@ -1,8 +1,8 @@
 package com.escalibre.util;
 
 
-import com.escalibre.dao.ItemDao;
-import com.escalibre.model.Item;
+import com.escalibre.dao.TblDao;
+import com.escalibre.model.Tbl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -28,20 +28,20 @@ public class RecordGeneratorUtil {
             String name = null;
 
             ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-            ItemDao itemDao = (ItemDao) context.getBean("itemDao");
+            TblDao tblDao = (TblDao) context.getBean("itemDao");
 
             /*
              * Male names
              */
             while ((name = bufferedMaleNames.readLine()) != null) {
-                itemDao.addTbla(new Item(name+copy));
+                tblDao.addTbla(new Tbl(name+copy));
             }
 
             /*
              * Female names
              */
             while ((name = bufferedFemaleNames.readLine()) != null) {
-                itemDao.addTblb(new Item(name+copy));
+                tblDao.addTblb(new Tbl(name+copy));
             }
         }
     }

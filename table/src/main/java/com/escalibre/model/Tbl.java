@@ -3,15 +3,15 @@ package com.escalibre.model;
 
 import com.escalibre.util.IdGeneratorUtil;
 
-public class Item {
+public class Tbl {
 
     private String word;
     private String id;
 
-    public Item(){
+    public Tbl(){
     }
     
-    public Item(String word){
+    public Tbl(String word){
         this.word = word;
         id = IdGeneratorUtil.getUniqueId();
     }
@@ -34,8 +34,8 @@ public class Item {
 
     @Override
     public boolean equals(Object o) {
-        Item item = (Item) o;
-        return word.equals(item.word)
+        Tbl tbl = (Tbl) o;
+        return word.equals(tbl.word)
                 ? true
                 : false;
     }

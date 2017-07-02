@@ -1,11 +1,9 @@
 package com.escalibre;
 
 
-import com.escalibre.model.Item;
-import org.springframework.stereotype.Component;
+import com.escalibre.model.Tbl;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class SqlAlgorithmJ7 extends Algorithm {
 
@@ -16,15 +14,15 @@ public class SqlAlgorithmJ7 extends Algorithm {
      * Реализация ложиться на разработчика.
      */
 
-    public List<Item> leftJoinCustom(List<Item> tblA, List<Item> tblB){
+    public List<Tbl> leftJoinCustom(List<Tbl> tblA, List<Tbl> tblB){
         if (tblA==null)
             return null;
         else if (tblB==null)
             return tblA;
 
-        List<Item> left = new ArrayList<>();
-        for (Item a : tblA){
-            for (Item b : tblB){
+        List<Tbl> left = new ArrayList<>();
+        for (Tbl a : tblA){
+            for (Tbl b : tblB){
                 if (!a.equals(b))
                     left.add(a);
             }
@@ -32,15 +30,15 @@ public class SqlAlgorithmJ7 extends Algorithm {
         return left;
     }
 
-    public List<Item> rightJoinCustom(List<Item> tblA, List<Item> tblB){
+    public List<Tbl> rightJoinCustom(List<Tbl> tblA, List<Tbl> tblB){
         if (tblB==null)
             return null;
         else if (tblA==null)
             return tblB;
 
-        List<Item> right = new ArrayList<>();
-        for (Item b : tblB){
-            for (Item a : tblA){
+        List<Tbl> right = new ArrayList<>();
+        for (Tbl b : tblB){
+            for (Tbl a : tblA){
                 if (!b.equals(a))
                     right.add(b);
             }
@@ -56,25 +54,25 @@ public class SqlAlgorithmJ7 extends Algorithm {
      * В период выполнения память сильно раздувается. (Чтобы погасить этот факт можно клонировать копию списка)
      */
 
-    public List<Item> leftJoin(List<Item> tblA, List<Item> tblB){
+    public List<Tbl> leftJoin(List<Tbl> tblA, List<Tbl> tblB){
         if (tblA==null)
             return null;
         else if (tblB==null)
             return tblA;
 
-        List<Item> left = (ArrayList) ((ArrayList) tblA).clone();
+        List<Tbl> left = (ArrayList) ((ArrayList) tblA).clone();
         return left.removeAll(tblB)
                 ? left
                 : null;
     }
 
-    public List<Item> rightJoin(List<Item> tblA, List<Item> tblB){
+    public List<Tbl> rightJoin(List<Tbl> tblA, List<Tbl> tblB){
         if (tblB==null)
             return null;
         else if (tblA==null)
             return tblB;
 
-        List<Item> right = (ArrayList) ((ArrayList) tblB).clone();
+        List<Tbl> right = (ArrayList) ((ArrayList) tblB).clone();
         return right.removeAll(tblA)
                 ? right
                 : null;

@@ -1,7 +1,7 @@
 package com.escalibre;
 
-import com.escalibre.dao.ItemDaoImpl;
-import com.escalibre.model.Item;
+import com.escalibre.dao.TblDaoImpl;
+import com.escalibre.model.Tbl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class SqlAlgorithmJ7Test {
 
     private SqlAlgorithmJ7 algorithm;
     private EmbeddedDatabase dbTblA, dbTblB;
-    private List<Item> tblA, tblB;
+    private List<Tbl> tblA, tblB;
 
 
     @Before
@@ -35,7 +35,7 @@ public class SqlAlgorithmJ7Test {
                 .addScript("db/insert-tblb-data.sql")
                 .build();
 
-        ItemDaoImpl itemDao = new ItemDaoImpl();
+        TblDaoImpl itemDao = new TblDaoImpl();
         itemDao.setNamedParameterJdbcTemplate(new NamedParameterJdbcTemplate(dbTblA));
         tblA = itemDao.findTblaAll();
         itemDao.setNamedParameterJdbcTemplate(new NamedParameterJdbcTemplate(dbTblB));
@@ -58,58 +58,58 @@ public class SqlAlgorithmJ7Test {
 
     @Test
     public void testFindTblIsNull() {
-        List<Item> items = new ArrayList<>();
+        List<Tbl> tbls = new ArrayList<>();
         List<String> tblC = new ArrayList<>();
 
-        items = algorithm.leftJoin(tblA, null);
+        tbls = algorithm.leftJoin(tblA, null);
 //        items = algorithm.leftJoin(null, tblB);
-        tblC = algorithm.toIDs(items);
+        tblC = algorithm.toIDs(tbls);
         System.out.println( "tblC (leftJoin) = " + tblC.size() );
 
 //        items = algorithm.rightJoin(tblA, null);
-        items = algorithm.rightJoin(null, tblB);
-        tblC = algorithm.toIDs(items);
+        tbls = algorithm.rightJoin(null, tblB);
+        tblC = algorithm.toIDs(tbls);
         System.out.println( "tblC (rightJoin) = " + tblC.size() );
     }
 
     @Test
     public void testFindTblCustomPerfomance() {
-        List<Item> items = new ArrayList<>();
+        List<Tbl> tbls = new ArrayList<>();
         List<String> tblC = new ArrayList<>();
         long start, finish;
 
         start = System.currentTimeMillis();
-        items = algorithm.leftJoinCustom(tblA, tblB); // >> 110 Millisecond
+        tbls = algorithm.leftJoinCustom(tblA, tblB); // >> 110 Millisecond
         finish = System.currentTimeMillis();
-        tblC = algorithm.toIDs(items);
+        tblC = algorithm.toIDs(tbls);
         System.out.println( "tblC (leftJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
 //        System.out.println( "tblC: " + tblC );
 
         start = System.currentTimeMillis();
-        items = algorithm.rightJoinCustom(tblA, tblB); // >> 106 Millisecond
+        tbls = algorithm.rightJoinCustom(tblA, tblB); // >> 106 Millisecond
         finish = System.currentTimeMillis();
-        tblC = algorithm.toIDs(items);
+        tblC = algorithm.toIDs(tbls);
         System.out.println( "tblC (rightJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
 //        System.out.println( "tblC: " + tblC );
     }
 
     @Test
     public void testFindTblHighPerfomance() {
-        List<Item> items = new ArrayList<>();
+        List<Tbl> tbls = new ArrayList<>();
         List<String> tblC = new ArrayList<>();
         long start, finish;
 
         start = System.currentTimeMillis();
-        items = algorithm.leftJoin(tblA, tblB); // >> 46 Millisecond
+        tbls = algorithm.leftJoin(tblA, tblB); // >> 46 Millisecond
         finish = System.currentTimeMillis();
-        tblC = algorithm.toIDs(items);
+        tblC = algorithm.toIDs(tbls);
         System.out.println( "tblC (leftJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
 //        System.out.println( "tblC: " + tblC );
 
         start = System.currentTimeMillis();
-        items = algorithm.rightJoin(tblA, tblB); // >> 7 Millisecond
+        tbls = algorithm.rightJoin(tblA, tblB); // >> 7 Millisecond
         finish = System.currentTimeMillis();
-        tblC = algorithm.toIDs(items);
+        tblC = algorithm.toIDs(tbls);
         System.out.println( "tblC (rightJoin) = " + tblC.size() + "  >> " + (finish-start) + " Millisecond" );
 //        System.out.println( "tblC: " + tblC );
     }
