@@ -16,7 +16,6 @@ public class DbGeneratorUtil {
         try {
             generator();
         } catch (IOException e) { e.printStackTrace(); }
-
     }
 
     public static void generator()
